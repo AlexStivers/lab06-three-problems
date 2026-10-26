@@ -8,7 +8,9 @@
 * practices decisions and one of the four loops.
 */
 //Writing Menu
+const int SEED = 4000;
 const int MENU_OPTIONS = 5;
+Random rng = new Random(SEED);
 
 Console.WriteLine("=== CSCI 1250 Lab 06 ===");
 Console.WriteLine("1. The Grade Checker");
@@ -73,4 +75,37 @@ if (choice == 1 || choice == 4)
     {
         Console.WriteLine($"{score} earns an F.");
     }
+}
+
+//The Dice Table
+if (choice == 2 || choice == 4)
+{
+    Console.WriteLine("\n=== Exercise 2: The Dice Table ===");
+    int rollCount = 0;
+    int winCount = 0;
+    char playAgain;
+
+    do
+    {
+        rollCount++;
+        int die1 = rng.Next(1, 7);
+        int die2 = rng.Next(1, 7);
+        int total = die1 + die2;
+
+        Console.Write($"Roll {rollCount}: {die1} and {die2}, total {total}.");
+
+        if (die1 == 1 && die2 == 1) Console.Write(" Snake eyes.");
+        else if (die1 == die2) Console.Write(" Doubles!");
+
+        if (total == 7 || total == 11)
+        {
+            Console.Write(" A winner.");
+            winCount++;
+        }
+
+        Console.WriteLine();
+        Console.Write("Roll again? (y/n): ");
+        playAgain = Convert.ToChar(Console.ReadLine());
+    } while (playAgain == 'y' || playAgain == 'Y');
+    Console.WriteLine($"You rolled {rollCount} times and won {winCount}.");
 }
