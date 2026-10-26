@@ -9,12 +9,21 @@
 */
 //Writing Menu
 using System.ComponentModel.Design;
-
+using System.Net.Quic;
+//Constants for fixed values
 const int SEED = 4000;
 const int NUM_SCORES = 5;
 const int PASSING_MARK = 60;
 const int MENU_OPTIONS = 5;
+const int QUIT_OPTION = 5;
+// Random object for dice table
 Random rng = new Random(SEED);
+int choice = 0;
+
+// do while: body must run once before menu can be displayed
+do
+{
+    choice = 0;    
 
 Console.WriteLine("=== CSCI 1250 Lab 06 ===");
 Console.WriteLine("1. The Grade Checker");
@@ -23,9 +32,9 @@ Console.WriteLine("3. The Score Report");
 Console.WriteLine("4. All three");
 Console.WriteLine("5. Quit");
 
-int choice = 0;
 
 // Adding Choices for Menu
+// while: the number of repeats is unknown before validation starts
 while (choice < 1 || choice > MENU_OPTIONS)
 {
     Console.Write("Choose 1 through 5: ");
@@ -41,9 +50,9 @@ while (choice < 1 || choice > MENU_OPTIONS)
 //The Grade Checker
 if (choice == 1 || choice == 4)
 {
-    Console.WriteLine("\n===Exercise 1: The Grade Checker ===");
+    Console.WriteLine("\n=== Exercise 1: The Grade Checker ===");
     int score = -1;
-
+// while; the number of validation retries is unknown before input
     while (score < 0 || score > 100)
     {
         Console.Write("Score: ");
@@ -51,7 +60,7 @@ if (choice == 1 || choice == 4)
 
         if (score < 0 || score > 100)
         {
-            Console.WriteLine("A score must be between 0 and 100");
+            Console.WriteLine("A score must be between 0 and 100.");
         }
     }
     
@@ -88,7 +97,7 @@ if (choice == 2 || choice == 4)
     int rollCount = 0;
     int winCount = 0;
     char playAgain;
-
+// do while: the body has to run once before there is anything to ask about
     do
     {
         rollCount++;
@@ -119,7 +128,7 @@ if (choice == 3 || choice == 4)
 {
     Console.WriteLine("\n=== Exercise 3: The Score Report ===");
     int[] scores = new int[NUM_SCORES];
-
+// for: filling the array requires position tracking for each score
     for (int i = 0; i < scores.Length; i++)
     {
         Console.Write($"Score {i + 1}: ");
@@ -130,7 +139,7 @@ if (choice == 3 || choice == 4)
     int total = 0;
     int highest = scores[0];
     int passingCount = 0;
-
+// foreach: summarizing scores checks every value without needing position
     foreach (int scoreVal in scores)
     {
         total += scoreVal;
@@ -145,3 +154,6 @@ if (choice == 3 || choice == 4)
     Console.WriteLine($"Highest: {highest}");
     Console.WriteLine($"Passing: {passingCount} of {scores.Length}");
 }
+} while (choice != QUIT_OPTION);
+
+Console.WriteLine("Goodbye.");
