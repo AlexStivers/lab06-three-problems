@@ -8,7 +8,11 @@
 * practices decisions and one of the four loops.
 */
 //Writing Menu
+using System.ComponentModel.Design;
+
 const int SEED = 4000;
+const int NUM_SCORES = 5;
+const int PASSING_MARK = 60;
 const int MENU_OPTIONS = 5;
 Random rng = new Random(SEED);
 
@@ -108,4 +112,36 @@ if (choice == 2 || choice == 4)
         playAgain = Convert.ToChar(Console.ReadLine());
     } while (playAgain == 'y' || playAgain == 'Y');
     Console.WriteLine($"You rolled {rollCount} times and won {winCount}.");
+}
+
+//The Score Report
+if (choice == 3 || choice == 4)
+{
+    Console.WriteLine("\n=== Exercise 3: The Score Report ===");
+    int[] scores = new int[NUM_SCORES];
+
+    for (int i = 0; i < scores.Length; i++)
+    {
+        Console.Write($"Score {i + 1}: ");
+        scores[i] = Convert.ToInt32(Console.ReadLine());
+
+    }
+
+    int total = 0;
+    int highest = scores[0];
+    int passingCount = 0;
+
+    foreach (int scoreVal in scores)
+    {
+        total += scoreVal;
+        if (scoreVal > highest) highest = scoreVal;
+        if (scoreVal >= PASSING_MARK) passingCount++;
+    }
+    double average = (double)total / scores.Length;
+
+    Console.WriteLine();
+    Console.WriteLine($"Scores entered: {scores.Length}");
+    Console.WriteLine($"Total: {total}");
+    Console.WriteLine($"Highest: {highest}");
+    Console.WriteLine($"Passing: {passingCount} of {scores.Length}");
 }
