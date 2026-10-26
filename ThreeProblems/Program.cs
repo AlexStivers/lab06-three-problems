@@ -31,3 +31,46 @@ while (choice < 1 || choice > MENU_OPTIONS)
     
     }
 }
+
+//The Grade Checker
+if (choice == 1 || choice == 4)
+{
+    Console.WriteLine("\n===Exercise 1: The Grade Checker ===");
+    int score = -1;
+
+    while (score < 0 || score > 100)
+    {
+        Console.Write("Score: ");
+        score = Convert.ToInt32(Console.ReadLine());
+
+        if (score < 0 || score > 100)
+        {
+            Console.WriteLine("A score must be between 0 and 100");
+        }
+    }
+    
+    if (score >= 90)
+    {
+        Console.WriteLine($"{score} earns an A.");
+    }
+
+    else if (score >= 80)
+    {
+        Console.WriteLine($"{score} earns a B.");
+    }
+
+    else if (score >= 70)
+    {
+        Console.WriteLine($"{score} earns a C.");
+    }
+
+    else if (score >= 60)
+    {
+        Console.WriteLine($"{score} earns a D.");
+    }
+
+    else
+    {
+        Console.WriteLine($"{score} earns an F.");
+    }
+}
